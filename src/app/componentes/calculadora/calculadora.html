@@ -1,0 +1,13 @@
+<h1>Calculadora de edades</h1>
+
+<input type="number" placeholder="Ingrese edad uno" [(ngModel)]="edadUno" />
+
+<input type="number" placeholder="Ingrese edad dos" [(ngModel)]="edadDos" />
+
+<button (click)="calcular()">Calcular</button>
+
+<button (click)="limpiar()">Limpiar</button>
+
+<input type="number" readonly value="{{ edadPromedio }}" />
+
+<input type="number" readonly value="{{ sumaEdades }}" />
