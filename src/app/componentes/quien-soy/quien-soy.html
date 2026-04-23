@@ -1,0 +1,62 @@
+<section class="quiensoy-page">
+  <div class="quiensoy-wrap">
+    @if (!datos()) {
+      <div class="loading">
+        <span class="spinner"></span>
+        <p>Cargando datos...</p>
+      </div>
+    } @else {
+      <header class="hero">
+        <img class="avatar" [src]="datos().avatar_url" alt="Foto de perfil">
+        <div class="hero-info">
+          <h1 class="hero-name">{{ datos().name || datos().login }}</h1>
+          @if (datos().bio) {
+            <p class="hero-bio">{{ datos().bio }}</p>
+          }
+
+          <ul class="stats">
+            @if (datos().public_repos !== undefined) {
+              <li><strong>{{ datos().public_repos }}</strong><span>repos</span></li>
+            }
+            @if (datos().followers !== undefined) {
+              <li><strong>{{ datos().followers }}</strong><span>followers</span></li>
+            }
+            @if (datos().following !== undefined) {
+              <li><strong>{{ datos().following }}</strong><span>following</span></li>
+            }
+          </ul>
+
+          @if (datos().html_url) {
+            <a class="github-link" [href]="datos().html_url" target="_blank" rel="noopener">
+              Ver perfil en GitHub →
+            </a>
+          }
+        </div>
+      </header>
+
+      <article class="info-block">
+        <h3>Sobre mí</h3>
+        <p>
+          Estudio en la UTN desde 2023, tengo 20 años, también trabajo en Outlier en donde
+          entrenamos inteligencias artificiales en mi caso sobre Coding. Nací el 03/06/2005,
+          tengo 3 hermanas y 1 hermano, una perra llamada Mocha, y me apasioné por la
+          programación desde los 13 años.
+        </p>
+      </article>
+
+      <article class="info-block">
+        <h3>Juego propio — Guitar Hero</h3>
+        <p>
+          Me decidí por un juego estilo Guitar Hero porque me parece divertido y un desafío.
+          Se juega con las teclas <kbd>Q</kbd> <kbd>W</kbd> <kbd>E</kbd> <kbd>R</kbd> tenés
+          que tocarlas acorde a la música según van apareciendo las notas.
+        </p>
+        <p class="rules">
+          <strong>Victoria:</strong> completar la canción con al menos 70% de aciertos.
+          <br>
+          <strong>Derrota:</strong> fallar 10 notas seguidas.
+        </p>
+      </article>
+    }
+  </div>
+</section>

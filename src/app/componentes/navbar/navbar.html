@@ -1,9 +1,10 @@
-<div class="navbar">
-    <button routerLink="/" routerLinkActive="active">Home</button>
-    &nbsp;|&nbsp;
-    <button routerLink="calculadora" routerLinkActive="active">Calculadora</button>
-    &nbsp;|&nbsp;
-    <button routerLink="registro" routerLinkActive="active">Registro</button>
-    &nbsp;|&nbsp;
-    <button routerLink="login" routerLinkActive="active">Login</button>
-</div>
+<nav class="main-navbar">
+  <a class="brand" routerLink="/">🎮 Sala de Juegos Toranzo</a>
+
+  <div class="nav-links">
+    <a routerLink="/bienvenida" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+    <a routerLink="/quiensoy" routerLinkActive="active">Quién soy</a>
+    <a routerLink="/registro" routerLinkActive="active">Registro</a>
+    <a routerLink="/login" routerLinkActive="active">Login</a>
+  </div>
+</nav>

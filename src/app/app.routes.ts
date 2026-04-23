@@ -2,8 +2,8 @@ import { Routes } from '@angular/router';
 import { Bienvenido } from './componentes/bienvenido/bienvenido';
 import { Login } from './componentes/login/login';
 import { Error } from './componentes/error/error';
-import { Calculadora } from './componentes/calculadora/calculadora';
 import { Registro } from './componentes/registro/registro';
+import { Quiensoy } from './componentes/quien-soy/quien-soy';
 
 export const routes: Routes = [
     {
@@ -24,15 +24,16 @@ export const routes: Routes = [
         component: Registro
     },
     {
+        path: 'quiensoy',
+        component: Quiensoy
+    },
+    {
         path: 'error',
         component: Error
     },
-    {
-        path: 'calculadora',
-        component: Calculadora
-    },
+
     {
         path: '**',
         component: Error
     },
-];
+]; 

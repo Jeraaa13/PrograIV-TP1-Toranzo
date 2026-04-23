@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { confirmarClaveValidator } from '../../validators/clave.validator';
 
 @Component({
   selector: 'app-registro',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './registro.html',
   styleUrl: './registro.css',
 })
@@ -43,9 +43,5 @@ export class Registro implements OnInit {
     localStorage.setItem('usuarios', JSON.stringify(usuarios));
 
     this.router.navigate(['/login']);
-  }
-
-  resetearForm() {
-    this.miFormulario.reset();
   }
 }

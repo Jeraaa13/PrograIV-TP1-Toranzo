@@ -1,7 +1,37 @@
-<p>Ingrese su nombre y contraseña</p>
+<div class="page-container">
+  <div class="surface-card">
+    <h2 class="surface-card__title">Iniciar sesión</h2>
 
-<input type="text" placeholder="Mail" [(ngModel)]="mail" />
+    <div class="form-group">
+      <label class="form-label" for="mail">Correo electrónico</label>
+      <input
+        id="mail"
+        type="email"
+        class="form-control"
+        placeholder="tu@correo.com"
+        [ngModel]="mail()"
+        (ngModelChange)="mail.set($event)" />
+    </div>
 
-<input type="password" placeholder="Clave" [(ngModel)]="clave" />
+    <div class="form-group">
+      <label class="form-label" for="clave">Contraseña</label>
+      <input
+        id="clave"
+        type="password"
+        class="form-control"
+        placeholder="••••••"
+        [ngModel]="clave()"
+        (ngModelChange)="clave.set($event)" />
+    </div>
 
-<button (click)="login()">Login</button>
+    <div class="form-actions">
+      <button class="btn-app btn-primary-app" type="button" (click)="login()">
+        Ingresar
+      </button>
+    </div>
+
+    <p class="form-foot">
+      ¿No tenés cuenta? <a routerLink="/registro">Registrate</a>
+    </p>
+  </div>
+</div>

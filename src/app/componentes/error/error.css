@@ -1,0 +1,45 @@
+.error-page {
+  min-height: calc(100vh - var(--navbar-height));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.error-box {
+  text-align: center;
+  padding: 3rem 2rem;
+  max-width: 480px;
+  background: var(--stormy-teal);
+  border: 1px solid rgba(66, 217, 200, 0.2);
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.error-code {
+  font-size: 7rem;
+  font-weight: 900;
+  color: var(--deep-crimson);
+  letter-spacing: -4px;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 4px 12px rgba(147, 22, 33, 0.5);
+  animation: errorPulse 2.4s ease-in-out infinite;
+}
+
+@keyframes errorPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.error-title {
+  font-size: 1.6rem;
+  color: var(--turquoise);
+  margin-bottom: 1rem;
+}
+
+.error-msg {
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+  line-height: 1.5;
+}

@@ -1,0 +1,100 @@
+.home {
+  min-height: calc(100vh - var(--navbar-height));
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 2rem 3rem;
+  gap: 2rem;
+}
+
+.home-title {
+  text-align: center;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--turquoise);
+  letter-spacing: 1px;
+}
+
+.games-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.game-card {
+  position: relative;
+  border: none;
+  border-radius: 14px;
+  cursor: pointer;
+  overflow: hidden;
+  padding: 0;
+  color: var(--text-light);
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  transition: transform 0.35s ease, box-shadow 0.35s ease, filter 0.35s ease;
+}
+
+.game-card:hover,
+.game-card:focus-visible {
+  transform: scale(1.05);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.5);
+  filter: brightness(1.1);
+  outline: none;
+  z-index: 2;
+}
+
+.card-overlay {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  background: linear-gradient(180deg, rgba(40, 70, 75, 0.1), rgba(40, 70, 75, 0.75));
+  padding: 2rem;
+}
+
+.game-icon {
+  font-size: 5rem;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
+}
+
+.game-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  text-align: center;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+/* Fondos placeholder — cuando tengas las imágenes, cambiá estos gradients por url('/ruta.jpg') */
+.card-ahorcado {
+  background-image: linear-gradient(135deg, var(--deep-crimson), var(--dark-slate-grey));
+}
+
+.card-mayor-menor {
+  background-image: linear-gradient(135deg, var(--stormy-teal), var(--pacific-cyan));
+}
+
+.card-preguntados {
+  background-image: linear-gradient(135deg, var(--pacific-cyan), var(--turquoise));
+}
+
+.card-guitar {
+  background-image: linear-gradient(135deg, var(--deep-crimson), var(--turquoise));
+}
+
+/* Responsive: 2x2 en tablet, 1 columna en móvil */
+@media (max-width: 900px) {
+  .games-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .games-grid {
+    grid-template-columns: 1fr;
+  }
+}
