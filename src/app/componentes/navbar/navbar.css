@@ -22,11 +22,15 @@
 }
 
 .nav-links a {
+  display: inline-flex;
+  align-items: center;
   padding: 0.5rem 1rem;
   border-radius: 6px;
   color: var(--text-light);
   font-weight: 500;
-  transition: background 0.2s ease, color 0.2s ease;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
 }
 
 .nav-links a:hover {
@@ -37,4 +41,47 @@
 .nav-links a.active {
   background: var(--pacific-cyan);
   color: var(--text-light);
+}
+
+.nav-links .user-info {
+  padding: 0.5rem 1rem;
+  color: var(--turquoise);
+  font-weight: 500;
+}
+
+.user-menu {
+  position: relative;
+}
+
+.user-trigger {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: none;
+  color: var(--text-light);
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+.user-trigger:hover {
+  background: var(--stormy-teal);
+}
+
+.user-trigger.activo {
+  background: var(--stormy-teal);
+}
+
+.user-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 0.5rem;
+  background: var(--dark-slate-grey);
+  border: 1px solid var(--stormy-teal);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  min-width: 180px;
+  z-index: 100;
 }

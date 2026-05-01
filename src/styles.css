@@ -38,7 +38,6 @@ button {
   font-family: inherit;
 }
 
-/* ---------- Layout utilities ---------- */
 
 .page-container {
   min-height: calc(100vh - var(--navbar-height));
@@ -71,7 +70,6 @@ button {
   letter-spacing: 0.5px;
 }
 
-/* ---------- Dark-theme Bootstrap overrides ---------- */
 
 .surface-card .form-label {
   color: var(--text-light);
@@ -112,7 +110,6 @@ button {
   margin-top: 0.35rem;
 }
 
-/* Botones temáticos (reemplazan a btn-primary/secondary de Bootstrap) */
 
 .btn-app {
   display: inline-flex;

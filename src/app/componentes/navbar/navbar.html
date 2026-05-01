@@ -2,9 +2,32 @@
   <a class="brand" routerLink="/">🎮 Sala de Juegos Toranzo</a>
 
   <div class="nav-links">
-    <a routerLink="/bienvenida" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+    <a
+      routerLink="/bienvenida"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      >Home</a
+    >
     <a routerLink="/quiensoy" routerLinkActive="active">Quién soy</a>
-    <a routerLink="/registro" routerLinkActive="active">Registro</a>
-    <a routerLink="/login" routerLinkActive="active">Login</a>
+    @if (authService.autenticado()) {
+      <div class="user-menu">
+        <button class="user-trigger" [class.activo]="dropdownAbierto()" (click)="toggleDropdown()">
+          <span>👤 </span>
+          <span class="user-info"
+            >{{ authService.usuario()?.nombre }} {{ authService.usuario()?.apellido }}</span
+          >
+          <span>▾</span>
+        </button>
+
+        @if (dropdownAbierto()) {
+          <div class="user-dropdown">
+            <a (click)="cerrarSesion()">Cerrar Sesion</a>
+          </div>
+        }
+      </div>
+    } @else {
+      <a routerLink="/registro" routerLinkActive="active">Registro</a>
+      <a routerLink="/login" routerLinkActive="active">Login</a>
+    }
   </div>
 </nav>

@@ -69,7 +69,6 @@
   text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
 }
 
-/* Fondos placeholder — cuando tengas las imágenes, cambiá estos gradients por url('/ruta.jpg') */
 .card-ahorcado {
   background-image: linear-gradient(135deg, var(--deep-crimson), var(--dark-slate-grey));
 }
@@ -86,7 +85,6 @@
   background-image: linear-gradient(135deg, var(--deep-crimson), var(--turquoise));
 }
 
-/* Responsive: 2x2 en tablet, 1 columna en móvil */
 @media (max-width: 900px) {
   .games-grid {
     grid-template-columns: repeat(2, 1fr);

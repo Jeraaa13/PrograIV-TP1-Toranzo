@@ -1,7 +1,8 @@
 import { Component, signal } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
-import { Usuario } from '../../clases/usuario';
+import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { inject } from '@angular/core';
+import { Auth } from '../../servicios/auth';
 
 @Component({
   selector: 'app-login',
@@ -10,19 +11,29 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './login.css',
 })
 export class Login {
+  private auth = inject(Auth);
   mail = signal<string>('');
   clave = signal<string>('');
 
-  constructor(private router: Router) { }
-
   login() {
-    const usuarios: Usuario[] = JSON.parse(localStorage.getItem('usuarios') ?? '[]');
-    const encontrado = usuarios.find((u: Usuario) => u.mail === this.mail() && u.clave === this.clave());
+    console.log('login');
+    this.auth.login(this.mail(), this.clave());
+  }
 
-    if (encontrado) {
-      this.router.navigate(['/bienvenida']);
-    } else {
-      this.router.navigate(['/error']);
+  accesoRapido(usuario: number) {
+    switch (usuario) {
+      case 1:
+        this.mail.set('messi@mail.com');
+        this.clave.set('Messi1+');
+        break;
+      case 2:
+        this.mail.set('manu@dona.com');
+        this.clave.set('Gino1+');
+        break;
+      default:
+        this.mail.set('admin@admin.com');
+        this.clave.set('Admin1+');
+        break;
     }
   }
 }
