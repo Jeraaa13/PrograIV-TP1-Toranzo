@@ -1,1 +1,62 @@
-<p>mayoromenor works!</p>
+<div class="mayoromenor">
+  @if (cartaActual(); as carta) {
+    <div class="reglas">
+      <span class="reglas-titulo">Reglas</span>
+      <ul>
+        <li><strong>Ganás</strong> al llegar a 10 puntos.</li>
+        <li><strong>Perdés</strong> al quedarte sin corazones.</li>
+        <li>El empate no resta vida ni suma puntos.</li>
+        <li>AS = 14 (la carta más alta).</li>
+      </ul>
+    </div>
+
+    <div
+      class="carta"
+      [class.carta--acierto]="ultimoResultado() === 'acierto'"
+      [class.carta--error]="ultimoResultado() === 'error'"
+      [class.carta--empate]="ultimoResultado() === 'empate'"
+    >
+      <img [src]="carta.image" />
+    </div>
+
+    <p class="prompt">La siguiente carta va a ser...</p>
+
+    <div class="botones">
+      <button class="boton-mayor" (click)="comparar('mayor')" [disabled]="gano() || perdio()">
+        Mayor
+      </button>
+      <button class="boton-menor" (click)="comparar('menor')" [disabled]="gano() || perdio()">
+        Menor
+      </button>
+    </div>
+
+    <div class="contador">
+      <div class="contador-fila">
+        <span class="contador-label">Tiempo</span>
+        <span class="contador-valor">{{ tiempo() }}s</span>
+      </div>
+      <div class="contador-fila">
+        <span class="contador-label">Puntos</span>
+        <span class="contador-valor" [class.puntos--sube]="ultimoResultado() === 'acierto'">
+          {{ puntos() }}
+        </span>
+      </div>
+      <div class="vidas" [class.vidas--temblando]="ultimoResultado() === 'error'">
+        @for (_ of vidasArray; track $index) {
+          <span class="corazon" [class.corazon--perdido]="$index >= vidas()">♥</span>
+        }
+      </div>
+    </div>
+
+    @if (gano() || perdio()) {
+      <div class="div-terminoJuego">
+        <button class="boton-terminoJuego" (click)="jugarDeNuevo()">Jugar de nuevo</button>
+      </div>
+    }
+  } @else {
+    <div class="cargando">
+      <div class="spinner"></div>
+      <span class="cargando-texto">Generando mazo de cartas...</span>
+    </div>
+  }
+</div>

@@ -1,0 +1,40 @@
+<div class="chat">
+  @if (authService.autenticado()) {
+    <button class="chat-button" [class.activo]="chatAbierto()" (click)="toggleChat()">💬</button>
+
+    @if (chatAbierto()) {
+      <div class="chat-ventana">
+        <header class="chat-header">Chat global</header>
+
+        <div class="chat-mensajes">
+          @for (mensaje of mensajes(); track mensaje.id) {
+            @if (mensaje.idUsuario === this.authService.usuario()?.id) {
+              <div class="chat-mensaje chat-mensaje--propio">
+                {{ mensaje.mensaje }}
+                <span class="chat-mensaje__autor">{{ this.authService.usuario()?.nombre }}</span>
+                <span class="chat-mensaje__hora">{{ mensaje.created_at | date: 'HH:mm' }}</span>
+              </div>
+            } @else {
+              <div class="chat-mensaje chat-mensaje--ajeno">
+                {{ mensaje.mensaje }}
+                <span class="chat-mensaje__autor">{{ nombresUsuarios()[mensaje.idUsuario!] }}</span>
+                <span class="chat-mensaje__hora">{{ mensaje.created_at | date: 'HH:mm' }}</span>
+              </div>
+            }
+          }
+        </div>
+
+        <form class="chat-form" (ngSubmit)="enviarMensaje()">
+          <input
+            class="chat-input"
+            [ngModel]="mensaje()"
+            (ngModelChange)="mensaje.set($event)"
+            name="mensaje"
+            placeholder="Escribi un mensaje..."
+          />
+          <button class="chat-enviar">Enviar</button>
+        </form>
+      </div>
+    }
+  }
+</div>

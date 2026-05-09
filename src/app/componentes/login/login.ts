@@ -16,7 +16,6 @@ export class Login {
   clave = signal<string>('');
 
   login() {
-    console.log('login');
     this.auth.login(this.mail(), this.clave());
   }
 

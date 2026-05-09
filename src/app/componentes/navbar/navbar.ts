@@ -18,12 +18,7 @@ export class Navbar {
     this.authService.cerrarSesion();
   }
 
-  getUser() {
-    console.log(this.authService.getUser());
-  }
-
   toggleDropdown() {
-    console.log('me active');
     this.dropdownAbierto.update((v) => !v);
   }
 }

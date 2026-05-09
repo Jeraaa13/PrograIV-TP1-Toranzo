@@ -3,8 +3,9 @@ import { SupabaseService } from './supabase';
 import { Router, RouterLink } from '@angular/router';
 import Swal from 'sweetalert2';
 import { signal } from '@angular/core';
-import { Usuario } from '../clases/usuario';
+import { Usuario } from '../interfaces/usuario';
 import { Session } from '@supabase/supabase-js';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -13,6 +14,11 @@ export class Auth {
   usuario = signal<Usuario | null>(null);
   private supabaseService = inject(SupabaseService);
   private router = inject(Router);
+  ERRORES_ES: Record<string, string> = {
+    'User already registered': 'Usuario ya registrado',
+    'Invalid login credentials': 'Credenciales inválidas',
+    'missing email or phone': 'Falta completar el correo o contraseña',
+  };
 
   constructor() {
     this.supabaseService.supabase.auth.onAuthStateChange((event, session) => {
@@ -34,7 +40,7 @@ export class Auth {
         if (error) {
           Swal.fire({
             title: 'Algo salio mal!',
-            text: error.message,
+            text: this.traducirError(error.message),
             icon: 'error',
           });
         } else {
@@ -58,14 +64,12 @@ export class Auth {
       })
       .then(({ data, error }) => {
         if (error) {
-          console.log('error');
           Swal.fire({
             title: 'Algo salio mal!',
-            text: error.message,
+            text: this.traducirError(error.message),
             icon: 'error',
           });
         } else {
-          console.log('bienvenida');
           this.router.navigate(['/bienvenida']);
         }
       });
@@ -95,11 +99,24 @@ export class Auth {
     return data;
   }
 
+  async getUserDataById(idUsuario: string | undefined) {
+    const { data, error } = await this.supabaseService.supabase
+      .from('usuarios')
+      .select('*')
+      .eq('id', idUsuario)
+      .single();
+    return data;
+  }
+
   cerrarSesion() {
     return this.supabaseService.supabase.auth.signOut();
   }
 
   getUser() {
     return this.supabaseService.supabase.auth.getUser();
+  }
+
+  traducirError(mensaje: string): string {
+    return this.ERRORES_ES[mensaje] ?? mensaje;
   }
 }
