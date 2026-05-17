@@ -1,0 +1,32 @@
+<div class="resultados-page">
+  <header class="resultados-header">
+    <h1>🏆 Tabla de Resultados</h1>
+    <p>Top 10 mejores puntajes por juego</p>
+  </header>
+
+  <div class="grid-tablas">
+    <app-tabla-resultados
+      [titulo]="'🪢 Ahorcado'"
+      [columnas]="['usuario', 'puntaje']"
+      [datos]="datosAhorcado()"
+    />
+
+    <app-tabla-resultados
+      [titulo]="'🃏 Mayor o Menor'"
+      [columnas]="['usuario', 'puntaje']"
+      [datos]="datosMayorOMenor()"
+    />
+
+    <app-tabla-resultados
+      [titulo]="'❓ Preguntados'"
+      [columnas]="['usuario', 'puntaje']"
+      [datos]="datosPreguntados()"
+    />
+
+    <app-tabla-resultados
+      [titulo]="'🎸 Guitar Hero'"
+      [columnas]="['usuario', 'puntaje']"
+      [datos]="datosGuitarHero()"
+    />
+  </div>
+</div>

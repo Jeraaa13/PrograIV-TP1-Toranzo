@@ -99,7 +99,7 @@ export class Auth {
     return data;
   }
 
-  async getUserDataById(idUsuario: string | undefined) {
+  async getUserDataById(idUsuario: string | undefined): Promise<Usuario> {
     const { data, error } = await this.supabaseService.supabase
       .from('usuarios')
       .select('*')

@@ -1,0 +1,327 @@
+.guitar {
+  min-height: calc(100vh - var(--navbar-height));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 1.5rem;
+}
+
+.escenario {
+  position: relative;
+  width: 480px;
+  height: 600px;
+  background: var(--dark-slate-grey);
+  border: 3px solid rgba(66, 217, 200, 0.3);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.4);
+}
+
+.video-arriba {
+  width: 480px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.4);
+  border: 2px solid rgba(66, 217, 200, 0.25);
+  background: var(--dark-slate-grey);
+}
+
+.video-arriba iframe {
+  display: block;
+  width: 100%;
+  border: none;
+}
+
+.zona-juego {
+  display: flex;
+  align-items: stretch;
+  gap: 1rem;
+}
+
+.pista {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  z-index: 1;
+}
+
+.carril {
+  position: relative;
+  border-left: 1px dashed rgba(168, 200, 196, 0.15);
+  border-right: 1px dashed rgba(168, 200, 196, 0.15);
+}
+
+.nota {
+  position: absolute;
+  left: 50%;
+  width: 64px;
+  height: 22px;
+  margin-left: -32px;
+  background: var(--turquoise);
+  border-radius: 999px;
+  box-shadow: 0 0 14px rgba(66, 217, 200, 0.7);
+  will-change: transform;
+  z-index: 3;
+}
+
+.zona-impacto {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.55), transparent);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.zona-impacto-marker {
+  position: absolute;
+  bottom: 130px;
+  width: 64px;
+  height: 22px;
+  margin-left: -32px;
+  border-radius: 999px;
+  border: 2px solid rgba(168, 200, 196, 0.4);
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 2;
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.zona-impacto-marker--activo {
+  border-color: var(--turquoise);
+  background: rgba(66, 217, 200, 0.3);
+  box-shadow: 0 0 18px rgba(66, 217, 200, 0.7);
+}
+
+.barra-vida {
+  width: 28px;
+  border-radius: 14px;
+  background: rgba(0, 0, 0, 0.45);
+  border: 2px solid rgba(168, 200, 196, 0.35);
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+}
+
+.barra-vida-fill {
+  width: 100%;
+  background: linear-gradient(to top, #ff4d6d, #ffb347, #42d9c8);
+  transition:
+    height 0.3s ease,
+    background 0.3s ease;
+}
+
+.barra-vida-fill--critica {
+  background: linear-gradient(to top, #93162a, #ff3a3a);
+  animation: latido-vida 0.8s ease infinite;
+}
+
+.controles {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.8rem;
+  width: 480px;
+}
+
+.boton-tecla {
+  background: var(--pacific-cyan);
+  color: var(--text-light);
+  border: 1px solid rgba(168, 200, 196, 0.4);
+  border-radius: 12px;
+  padding: 1rem;
+  font-size: 1.3rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  transition:
+    transform 0.1s ease,
+    background 0.2s ease;
+}
+
+.boton-tecla:active {
+  background: var(--turquoise);
+  color: var(--dark-slate-grey);
+  transform: translateY(2px);
+}
+
+.hud {
+  display: flex;
+  gap: 2rem;
+  font-weight: 800;
+  align-items: center;
+}
+
+.hud-puntos,
+.hud-combo {
+  display: inline-block;
+  transition:
+    color 0.25s ease,
+    font-size 0.25s ease,
+    text-shadow 0.25s ease,
+    transform 0.15s ease;
+}
+
+.hud-puntos--tier1 {
+  color: #cfd8dc;
+  font-size: 1.2rem;
+}
+.hud-puntos--tier2 {
+  color: var(--turquoise);
+  font-size: 1.4rem;
+  text-shadow: 0 0 6px rgba(66, 217, 200, 0.6);
+}
+.hud-puntos--tier3 {
+  color: #ffe066;
+  font-size: 1.6rem;
+  text-shadow: 0 0 8px rgba(255, 224, 102, 0.7);
+}
+.hud-puntos--tier4 {
+  color: #ffa94d;
+  font-size: 1.85rem;
+  text-shadow:
+    0 0 10px rgba(255, 169, 77, 0.8),
+    0 0 18px rgba(255, 169, 77, 0.5);
+}
+.hud-puntos--tier5 {
+  color: #ff3a3a;
+  font-size: 2.1rem;
+  text-shadow:
+    0 0 12px rgba(255, 58, 58, 0.9),
+    0 0 22px rgba(255, 58, 58, 0.6);
+  animation: pulso-fuego 0.7s ease infinite;
+}
+
+.hud-combo--tier1 {
+  color: #cfd8dc;
+  font-size: 1.2rem;
+}
+.hud-combo--tier2 {
+  color: var(--turquoise);
+  font-size: 1.4rem;
+  text-shadow: 0 0 6px rgba(66, 217, 200, 0.6);
+}
+.hud-combo--tier3 {
+  color: #ffe066;
+  font-size: 1.6rem;
+  text-shadow: 0 0 8px rgba(255, 224, 102, 0.7);
+}
+.hud-combo--tier4 {
+  color: #ffa94d;
+  font-size: 1.85rem;
+  text-shadow:
+    0 0 10px rgba(255, 169, 77, 0.8),
+    0 0 18px rgba(255, 169, 77, 0.5);
+}
+.hud-combo--tier5 {
+  color: #ff3a3a;
+  font-size: 2.1rem;
+  text-shadow:
+    0 0 12px rgba(255, 58, 58, 0.9),
+    0 0 22px rgba(255, 58, 58, 0.6);
+  animation: pulso-fuego 0.7s ease infinite;
+}
+
+.hud--bump {
+  animation: bump 0.25s ease;
+}
+
+.div-terminoJuego {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.5rem;
+  animation: aparecer 0.35s ease;
+}
+
+.boton-terminoJuego {
+  background: var(--pacific-cyan);
+  color: var(--text-light);
+  border: none;
+  border-radius: 14px;
+  padding: 1.1rem 3rem;
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: 0.6px;
+  cursor: pointer;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.4);
+  transition:
+    transform 0.15s ease,
+    background 0.2s ease,
+    color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.boton-terminoJuego:hover {
+  background: var(--turquoise);
+  color: var(--dark-slate-grey);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(66, 217, 200, 0.55);
+}
+
+.boton-terminoJuego:active {
+  transform: translateY(0);
+}
+
+@keyframes aparecer {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.boton-grabar {
+  background: var(--stormy-teal);
+  color: var(--text-light);
+  border: 1px solid rgba(168, 200, 196, 0.3);
+  border-radius: 10px;
+  padding: 0.6rem 1.2rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.boton-grabar:hover {
+  opacity: 1;
+}
+
+@keyframes bump {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.35);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes pulso-fuego {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.06);
+  }
+}
+
+@keyframes latido-vida {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
+}

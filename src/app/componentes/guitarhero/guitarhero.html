@@ -1,1 +1,88 @@
-<p>guitarhero works!</p>
+<div class="guitar">
+  <div class="video-arriba" [hidden]="gano() || perdio()">
+    <div id="player"></div>
+  </div>
+
+  <div class="zona-juego">
+    <div class="escenario">
+      <div class="pista">
+        @for (c of carriles; track c) {
+          <div class="carril"></div>
+        }
+
+        @for (n of notasEnPantalla(); track n.tiempo) {
+          <div
+            class="nota"
+            [style.left.%]="n.carril * 25 + 12.5"
+            [style.transform]="'translateY(' + posicionY(n) + 'px)'"
+          ></div>
+        }
+      </div>
+
+      <div class="zona-impacto"></div>
+
+      @for (carril of carriles; track carril) {
+        <div
+          class="zona-impacto-marker"
+          [style.left.%]="carril * 25 + 12.5"
+          [class.zona-impacto-marker--activo]="carrilActivo() === $index"
+        ></div>
+      }
+    </div>
+
+    <div class="barra-vida">
+      <div
+        class="barra-vida-fill"
+        [style.height.%]="vida()"
+        [class.barra-vida-fill--critica]="vida() < 30"
+      ></div>
+    </div>
+  </div>
+
+  <div class="controles">
+    @for (carril of carriles; track carril) {
+      <button
+        class="boton-tecla"
+        (click)="clickCarril(carril)"
+        [disabled]="!videoIniciado() || gano() || perdio()"
+      >
+        {{ carril }}
+      </button>
+    }
+  </div>
+
+  <div class="hud">
+    <span
+      class="hud-puntos"
+      [class.hud--bump]="puntosBump()"
+      [class.hud-puntos--tier1]="puntos() < 50"
+      [class.hud-puntos--tier2]="puntos() >= 50 && puntos() < 150"
+      [class.hud-puntos--tier3]="puntos() >= 150 && puntos() < 300"
+      [class.hud-puntos--tier4]="puntos() >= 300 && puntos() < 500"
+      [class.hud-puntos--tier5]="puntos() >= 500"
+    >
+      Puntos: {{ puntos().toFixed(0) }}
+    </span>
+    <span
+      class="hud-combo"
+      [class.hud--bump]="comboBump()"
+      [class.hud-combo--tier1]="combo() < 1.5"
+      [class.hud-combo--tier2]="combo() >= 1.5 && combo() < 2.5"
+      [class.hud-combo--tier3]="combo() >= 2.5 && combo() < 4"
+      [class.hud-combo--tier4]="combo() >= 4 && combo() < 6"
+      [class.hud-combo--tier5]="combo() >= 6"
+    >
+      Combo: x{{ combo().toFixed(1) }}
+    </span>
+  </div>
+
+  @if (gano() || perdio()) {
+    <div class="div-terminoJuego">
+      <button class="boton-terminoJuego" (click)="jugarDeNuevo()">Jugar de nuevo</button>
+    </div>
+  }
+
+  @if (videoIniciado() && !gano() && !perdio()) {
+    <button class="boton-grabar" (click)="simularVictoria()">Ganar rápido (demo)</button>
+  }
+</div>

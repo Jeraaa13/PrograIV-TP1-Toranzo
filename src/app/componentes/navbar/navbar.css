@@ -1,4 +1,5 @@
 .main-navbar {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -14,6 +15,45 @@
   font-weight: 700;
   color: var(--turquoise);
   letter-spacing: 0.5px;
+}
+
+.nav-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.resultados-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1.3rem;
+  border-radius: 999px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  color: #1a1a1a;
+  background: linear-gradient(135deg, #f6c042 0%, #ffdd6d 50%, #f6c042 100%);
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.15),
+    0 4px 14px rgba(246, 192, 66, 0.35);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease;
+}
+
+.resultados-btn:hover {
+  transform: translateY(-1px) scale(1.03);
+  filter: brightness(1.08);
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.2),
+    0 6px 20px rgba(246, 192, 66, 0.55);
+}
+
+.resultados-btn.active {
+  box-shadow:
+    0 0 0 2px var(--turquoise),
+    0 4px 14px rgba(246, 192, 66, 0.55);
 }
 
 .nav-links {
@@ -47,6 +87,12 @@
   padding: 0.5rem 1rem;
   color: var(--turquoise);
   font-weight: 500;
+  display: inline-block;
+  max-width: 200px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
 }
 
 .user-menu {

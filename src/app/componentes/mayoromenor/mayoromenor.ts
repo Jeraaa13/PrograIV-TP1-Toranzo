@@ -22,7 +22,7 @@ export class Mayoromenor implements OnInit {
   cartaSiguiente = signal<Carta | null>(null);
   deck_id = signal<string | null>(null);
   VALORES: Record<string, number> = {
-    ACE: 14,
+    ACE: 1,
     KING: 13,
     QUEEN: 12,
     JACK: 11,
@@ -44,6 +44,7 @@ export class Mayoromenor implements OnInit {
   tiempoInicio = 0;
   intervaloId: any;
   tiempo = signal(0);
+  cartasRestantes = 51;
 
   async ngOnInit() {
     this.iniciarJuego();
@@ -78,6 +79,7 @@ export class Mayoromenor implements OnInit {
       this.http.get<Mazo>('https://www.deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1'),
     );
     this.deck_id.set(mazo.deck_id);
+    this.cartasRestantes = mazo.remaining;
   }
 
   async traerCartaActual() {
@@ -92,13 +94,17 @@ export class Mayoromenor implements OnInit {
   }
 
   async traerCartaSiguiente() {
-    if (!this.deck_id()) return;
+    if (!this.deck_id() || this.cartasRestantes === 0) {
+      this.cartaSiguiente.set(null);
+      return;
+    }
     const draw = await firstValueFrom(
       this.http.get<Draw>(
         'https://www.deckofcardsapi.com/api/deck/' + this.deck_id() + '/draw?count=1',
       ),
     );
     this.cartaSiguiente.set(draw.cards[0]);
+    this.cartasRestantes = draw.remaining;
   }
 
   comparar(eleccion: 'mayor' | 'menor') {
@@ -136,8 +142,8 @@ export class Mayoromenor implements OnInit {
       Swal.fire(
         this.gano() ? 'Ganaste!' : 'Perdiste!',
         this.gano()
-          ? 'Felicitaciones sus estadisiticas seran guardadas!'
-          : 'Sus estadisticas seran guardadas!',
+          ? 'Felicitaciones sus estadìsticas seran guardadas!'
+          : 'Sus estadìsticas seran guardadas!',
         this.gano() ? 'success' : 'error',
       );
     }
@@ -148,7 +154,7 @@ export class Mayoromenor implements OnInit {
   }
 
   gano() {
-    return this.puntos() >= 10;
+    return this.cartasRestantes == 0;
   }
 
   terminarJuego() {

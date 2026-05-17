@@ -1,7 +1,6 @@
 <div class="ahorcado">
   <div class="chabon">
     <svg class="hangman-svg" viewBox="0 0 200 250">
-      <!-- Horca (siempre visible) -->
       <line x1="20" y1="240" x2="180" y2="240" />
       <line x1="50" y1="240" x2="50" y2="20" />
       <line x1="50" y1="20" x2="140" y2="20" />
@@ -52,7 +51,8 @@
 
   <div class="contador" [class.contador--peligro]="intentosRestantes() <= 2">
     Intentos restantes: {{ intentosRestantes() }} <br />
-    Tiempo: {{ tiempo() }}
+    Tiempo: {{ tiempo() }} <br />
+    Puntaje: {{ puntaje() }}
   </div>
 
   @if (this.gano() || this.perdio()) {

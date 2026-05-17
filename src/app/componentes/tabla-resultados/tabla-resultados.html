@@ -1,0 +1,19 @@
+<h2>{{ titulo() }}</h2>
+<table>
+  <thead>
+    <tr>
+      @for (col of columnas(); track col) {
+        <th>{{ col }}</th>
+      }
+    </tr>
+  </thead>
+  <tbody>
+    @for (fila of datos(); track $index) {
+      <tr>
+        @for (col of columnas(); track col) {
+          <td>{{ fila[col] }}</td>
+        }
+      </tr>
+    }
+  </tbody>
+</table>

@@ -7,4 +7,5 @@ export interface AhorcadoData {
   gano: boolean;
   tiempoSegundos: number;
   errores: number;
+  puntaje: number;
 }

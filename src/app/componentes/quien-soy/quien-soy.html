@@ -7,7 +7,7 @@
       </div>
     } @else {
       <header class="hero">
-        <img class="avatar" [src]="datos().avatar_url" alt="Foto de perfil">
+        <img class="avatar" [src]="datos().avatar_url" alt="Foto de perfil" />
         <div class="hero-info">
           <h1 class="hero-name">{{ datos().name || datos().login }}</h1>
           @if (datos().bio) {
@@ -16,13 +16,22 @@
 
           <ul class="stats">
             @if (datos().public_repos !== undefined) {
-              <li><strong>{{ datos().public_repos }}</strong><span>repos</span></li>
+              <li>
+                <strong>{{ datos().public_repos }}</strong
+                ><span>repos</span>
+              </li>
             }
             @if (datos().followers !== undefined) {
-              <li><strong>{{ datos().followers }}</strong><span>followers</span></li>
+              <li>
+                <strong>{{ datos().followers }}</strong
+                ><span>followers</span>
+              </li>
             }
             @if (datos().following !== undefined) {
-              <li><strong>{{ datos().following }}</strong><span>following</span></li>
+              <li>
+                <strong>{{ datos().following }}</strong
+                ><span>following</span>
+              </li>
             }
           </ul>
 
@@ -38,23 +47,23 @@
         <h3>Sobre mí</h3>
         <p>
           Estudio en la UTN desde 2023, tengo 20 años, también trabajo en Outlier en donde
-          entrenamos inteligencias artificiales en mi caso sobre Coding. Nací el 03/06/2005,
-          tengo 3 hermanas y 1 hermano, una perra llamada Mocha, y me apasioné por la
-          programación desde los 13 años.
+          entrenamos inteligencias artificiales en mi caso sobre Coding. Nací el 03/06/2005, tengo 3
+          hermanas y 1 hermano, una perra llamada Mocha, y me apasioné por la programación desde los
+          13 años.
         </p>
       </article>
 
       <article class="info-block">
-        <h3>Juego propio — Guitar Hero</h3>
+        <h3>Juego propio - Guitar Hero</h3>
         <p>
-          Me decidí por un juego estilo Guitar Hero porque me parece divertido y un desafío.
-          Se juega con las teclas <kbd>Q</kbd> <kbd>W</kbd> <kbd>E</kbd> <kbd>R</kbd> tenés
-          que tocarlas acorde a la música según van apareciendo las notas.
+          Me decidí por un juego estilo Guitar Hero porque me parece divertido y un desafío. Se
+          juega con los botones en pantalla y tenés que tocarlos acorde a la música según van
+          apareciendo las notas.
         </p>
         <p class="rules">
-          <strong>Victoria:</strong> completar la canción con al menos 70% de aciertos.
-          <br>
-          <strong>Derrota:</strong> fallar 10 notas seguidas.
+          <strong>Victoria:</strong> llegar al fin de la cancion sin perder toda la vida.
+          <br />
+          <strong>Derrota:</strong> perder toda la vida.
         </p>
       </article>
     }

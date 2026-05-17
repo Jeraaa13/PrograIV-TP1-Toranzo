@@ -82,6 +82,7 @@ export class Ahorcado implements OnInit, OnDestroy {
         gano: this.gano(),
         tiempoSegundos: tiempoFinal,
         errores: this.errores(),
+        puntaje: this.puntaje(),
       });
       Swal.fire(
         this.gano() ? 'Ganaste!' : 'Perdiste!',
@@ -95,6 +96,11 @@ export class Ahorcado implements OnInit, OnDestroy {
 
   errores(): number {
     return this.letrasUsadas().filter((l) => !this.palabraSeleccionada.includes(l)).length;
+  }
+
+  puntaje(): number {
+    if (!this.gano()) return 0;
+    return Math.floor((this.intentosRestantes() * 100) / Math.max(this.tiempo(), 1));
   }
 
   intentosRestantes(): number {
@@ -133,3 +139,5 @@ export class Ahorcado implements OnInit, OnDestroy {
     }, 1000);
   }
 }
+
+// arreglar nombres largo en navbar, puntajes en ahorcado y mayor o menor y agregar modulos/lazyloading

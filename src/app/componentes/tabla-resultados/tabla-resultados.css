@@ -1,0 +1,188 @@
+:host {
+  display: block;
+  background: linear-gradient(180deg, var(--stormy-teal) 0%, var(--dark-slate-grey) 100%);
+  border: 1px solid rgba(66, 217, 200, 0.25);
+  border-radius: 14px;
+  padding: 1.5rem 1.25rem;
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+  animation: cardIn 0.5s ease backwards;
+}
+
+:host:hover {
+  transform: translateY(-3px);
+  border-color: var(--turquoise);
+  box-shadow:
+    0 12px 32px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(66, 217, 200, 0.4);
+}
+
+h2 {
+  margin: 0 0 1rem;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--turquoise);
+  text-align: center;
+  letter-spacing: 0.5px;
+  padding-bottom: 0.75rem;
+  border-bottom: 2px solid rgba(66, 217, 200, 0.2);
+}
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 4px;
+  table-layout: fixed;
+}
+
+colgroup .col-usuario {
+  width: auto;
+}
+colgroup .col-puntaje {
+  width: 90px;
+}
+
+thead th {
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  color: var(--text-light);
+  opacity: 0.55;
+  font-weight: 600;
+  padding: 0.4rem 0.75rem;
+  text-align: left;
+}
+
+thead th:last-child {
+  text-align: right;
+}
+
+tbody tr {
+  background: rgba(0, 0, 0, 0.18);
+  transition: background 0.2s ease;
+}
+
+tbody tr:hover {
+  background: rgba(66, 217, 200, 0.08);
+}
+
+tbody td {
+  padding: 0.65rem 0.75rem;
+  color: var(--text-light);
+  font-size: 0.95rem;
+}
+
+tbody td:first-child {
+  border-radius: 8px 0 0 8px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 0;
+}
+
+tbody td:last-child {
+  border-radius: 0 8px 8px 0;
+  text-align: right;
+  font-weight: 700;
+  color: var(--turquoise);
+  font-variant-numeric: tabular-nums;
+}
+
+/* podio: primeros 3 lugares con medalla */
+tbody tr:nth-child(1) td:first-child::before {
+  content: '🥇';
+  margin-right: 0.5rem;
+}
+tbody tr:nth-child(2) td:first-child::before {
+  content: '🥈';
+  margin-right: 0.5rem;
+}
+tbody tr:nth-child(3) td:first-child::before {
+  content: '🥉';
+  margin-right: 0.5rem;
+}
+
+tbody tr:nth-child(1) {
+  background: linear-gradient(
+    90deg,
+    rgba(246, 192, 66, 0.18) 0%,
+    rgba(246, 192, 66, 0.05) 100%
+  );
+}
+tbody tr:nth-child(1) td:last-child {
+  color: #ffdd6d;
+  font-size: 1.05rem;
+}
+
+tbody tr:nth-child(2) {
+  background: linear-gradient(
+    90deg,
+    rgba(200, 200, 220, 0.12) 0%,
+    rgba(200, 200, 220, 0.03) 100%
+  );
+}
+
+tbody tr:nth-child(3) {
+  background: linear-gradient(
+    90deg,
+    rgba(205, 127, 50, 0.15) 0%,
+    rgba(205, 127, 50, 0.04) 100%
+  );
+}
+
+/* empty state */
+tbody:empty::after,
+tbody:has(tr:only-child:empty)::after {
+  content: 'Sin partidas registradas';
+  display: block;
+  text-align: center;
+  padding: 1.5rem;
+  color: var(--text-light);
+  opacity: 0.4;
+  font-style: italic;
+}
+
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 600px) {
+  :host {
+    padding: 1.1rem 0.85rem;
+    border-radius: 12px;
+  }
+
+  h2 {
+    font-size: 1.15rem;
+    padding-bottom: 0.55rem;
+    margin-bottom: 0.7rem;
+  }
+
+  thead th {
+    font-size: 0.68rem;
+    padding: 0.3rem 0.5rem;
+    letter-spacing: 1px;
+  }
+
+  tbody td {
+    padding: 0.55rem 0.55rem;
+    font-size: 0.88rem;
+  }
+
+  tbody tr:nth-child(1) td:last-child {
+    font-size: 0.95rem;
+  }
+}

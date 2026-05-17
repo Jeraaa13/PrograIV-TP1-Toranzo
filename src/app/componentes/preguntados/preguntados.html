@@ -1,1 +1,76 @@
-<p>preguntados works!</p>
+<div class="preguntados">
+  @if (preguntaActual(); as pregunta) {
+    <img class="imagen" [src]="imagenURL()" />
+
+    <div class="meta">
+      <span class="meta-categoria">{{ CATEGORIAS[pregunta.category] }}</span>
+      <span class="meta-dificultad meta-dificultad--{{ pregunta.difficulty }}">
+        {{ DIFICULTADES[pregunta.difficulty] }}
+      </span>
+    </div>
+
+    <div class="pregunta">
+      <span> {{ pregunta.question }}</span>
+    </div>
+
+    <div class="respuestas" [class.respuesta--dos]="pregunta.type === 'boolean'">
+      @for (respuesta of respuestasMezcladas(); track respuesta) {
+        <button
+          class="boton-respuesta"
+          [class.boton-respuesta--correcta]="
+            eleccionUsuario() === respuesta && respuesta === pregunta.correct_answer
+          "
+          [class.boton-respuesta--errada]="
+            eleccionUsuario() === respuesta && respuesta !== pregunta.correct_answer
+          "
+          [class.boton-respuesta--revela-correcta]="
+            eleccionUsuario() !== null &&
+            eleccionUsuario() !== respuesta &&
+            respuesta === pregunta.correct_answer
+          "
+          [disabled]="eleccionUsuario() !== null"
+          (click)="recibirRespuesta(respuesta)"
+        >
+          {{ respuesta }}
+        </button>
+      }
+    </div>
+
+    <div class="contador">
+      <div class="contador-fila">
+        <span class="contador-label">Tiempo Pregunta</span>
+        <span class="contador-valor">{{ tiempoPregunta() }}s</span>
+      </div>
+      <div class="contador-fila">
+        <span class="contador-label">Tiempo</span>
+        <span class="contador-valor">{{ tiempo() }}s</span>
+      </div>
+      <div class="contador-fila">
+        <span class="contador-label">Puntos</span>
+        <span class="contador-valor" [class.puntos--sube]="ultimoResultado() === 'acierto'">
+          {{ puntos() }}
+        </span>
+      </div>
+      <div class="vidas" [class.vidas--temblando]="ultimoResultado() === 'error'">
+        @for (_ of vidasArray; track $index) {
+          <span class="corazon" [class.corazon--perdido]="$index >= vidas()">♥</span>
+        }
+      </div>
+    </div>
+
+    @if (gano() || perdio()) {
+      <div class="div-terminoJuego">
+        <button class="boton-terminoJuego" (click)="jugarDeNuevo()">Jugar de nuevo</button>
+      </div>
+    } @else if (eleccionUsuario()) {
+      <div class="siguiente">
+        <button (click)="siguientePregunta()">-></button>
+      </div>
+    }
+  } @else {
+    <div class="cargando">
+      <div class="spinner"></div>
+      <span class="cargando-texto">Generando preguntas</span>
+    </div>
+  }
+</div>
